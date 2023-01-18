@@ -1,4 +1,4 @@
-# Read of repo for the Advent of Code 2022
+# Repo for the Advent of Code 2022
 https://adventofcode.com/2022 
 ## Description
 Tasks are done in the golang.
