@@ -12,4 +12,7 @@ Tasks are done in the golang.
     - task 2 - Done  
 * Day 3  
     - task 1 - Done  
+    - task 2 - Done 
+* Day 4
+    - task 1 - Done  
     - task 2 - Done  

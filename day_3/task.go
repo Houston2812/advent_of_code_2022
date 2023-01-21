@@ -53,8 +53,7 @@ func main() {
 	task := flag.String("task", "", "The number of task")
 	flag.Parse()
 
-	// if len(*file_input) == 0 || len(*task) == 0
-	if len(*file_input) == 0 {
+	if len(*file_input) == 0 || len(*task) == 0 {
 		os.Exit(0)
 	}
 
