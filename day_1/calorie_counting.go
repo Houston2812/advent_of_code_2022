@@ -28,7 +28,7 @@ func main()  {
 
 	data, err := os.Open(*file_input)
 	check(err)
-
+	defer data.Close()
 
 	scanner := bufio.NewScanner(data)
 	counter := 1

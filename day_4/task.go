@@ -26,7 +26,7 @@ func debug_print(msg string) {
 func main()  {
 	flag.BoolVar(&debug, "d", false, "Print debug messages")
 	file_input := flag.String("f", "", "Path to file that should be read")
-	task := flag.String("task", "", "The number of task")
+	task := flag.String("task", "", "The number of task (task1 or task2)")
 	flag.Parse()
 
 	if len(*file_input) == 0 || len(*task) == 0 {
@@ -35,6 +35,7 @@ func main()  {
 
 	data, err := os.Open(*file_input)
 	check(err)
+	defer data.Close()
 
 	debug_print("Debug started")
 

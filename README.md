@@ -16,3 +16,6 @@ Tasks are done in the golang.
 * Day 4
     - task 1 - Done  
     - task 2 - Done  
+* Day 5
+    - task 1 - Done
+    - task 2 - Done
