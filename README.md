@@ -19,3 +19,13 @@ Tasks are done in the golang.
 * [Day 5](day_5/)
     - task 1 - Done
     - task 2 - Done
+
+## Execution
+To run a particular code use following pattern of terminal command:
+
+- `go run task.go -d -f input_file -task task1`  - run task 1
+- `go run task.go -d -f input_file -task task2`  - run task 2
+
+_Note! If any additional configurtion will be required, it will be mentioned in the README of particular day_
+
+>  By Huseyn Gambarov. 2022
