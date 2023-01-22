@@ -112,6 +112,7 @@ func print_queue_elements(msgs []queue.ItemType) {
 	}
 	fmt.Println()
 }
+
 // function to read the lines
 func readLines(data *os.File) ([]string, error) {
     var lines []string
