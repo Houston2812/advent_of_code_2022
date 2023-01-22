@@ -23,7 +23,7 @@ func debug_print(msg string) {
 	}
 }
 
-func main()  {
+func main() {
 	flag.BoolVar(&debug, "d", false, "Print debug messages")
 	file_input := flag.String("f", "", "Path to file that should be read")
 	task := flag.String("task", "", "The number of task (task1 or task2)")
@@ -48,10 +48,10 @@ func main()  {
 			ranges := strings.Split(line, ",")
 			first_assignment := strings.Split(ranges[0], "-")
 			second_assignment := strings.Split(ranges[1], "-")
-			
+
 			debug_print(first_assignment[0])
 
-			// Get integer values of the ranges 
+			// Get integer values of the ranges
 			a0, err := strconv.Atoi(first_assignment[0])
 			check(err)
 			b0, err := strconv.Atoi(first_assignment[1])
@@ -63,8 +63,8 @@ func main()  {
 			check(err)
 
 			debug_print(line)
-			
-			// First case 
+
+			// First case
 			// ----a0----b0----
 			// -a1---------b1--
 			if a0 >= a1 && b0 <= b1 {
@@ -72,7 +72,7 @@ func main()  {
 				debug_print("First in second")
 				continue
 			}
-			
+
 			// Second case
 			// --a0-------b0--
 			// -----a1--b1----
@@ -94,10 +94,10 @@ func main()  {
 			ranges := strings.Split(line, ",")
 			first_assignment := strings.Split(ranges[0], "-")
 			second_assignment := strings.Split(ranges[1], "-")
-			
+
 			debug_print(first_assignment[0])
 
-			// Get integer values of the ranges 
+			// Get integer values of the ranges
 			a0, err := strconv.Atoi(first_assignment[0])
 			check(err)
 			b0, err := strconv.Atoi(first_assignment[1])
@@ -109,16 +109,16 @@ func main()  {
 			check(err)
 
 			debug_print(line)
-		
-			// First case 
+
+			// First case
 			// -a0--b0----------
 			// --------a1---b1--
 			if a0 > a1 && b0 > a1 && a0 > b1 && b0 > b1 {
 				counter++
 				continue
 			}
-			
-			// First case 
+
+			// First case
 			// --------a0---b0--
 			// -a1--b1----------
 			if a1 > a0 && b1 > a0 && a1 > b0 && b1 > b0 {
@@ -128,8 +128,8 @@ func main()  {
 
 			debug_print("Overlapping")
 
- 		}
-		fmt.Printf("The amount of overlapping assignments: %d\n", line_number - counter)
+		}
+		fmt.Printf("The amount of overlapping assignments: %d\n", line_number-counter)
 
 	}
 }

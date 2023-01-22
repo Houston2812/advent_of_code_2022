@@ -10,19 +10,20 @@ import (
 )
 
 var debug bool
-func check(e error)  {
+
+func check(e error) {
 	if e != nil {
 		panic(e)
 	}
 }
 
-func debug_print(msg string)  {
+func debug_print(msg string) {
 	if debug {
 		fmt.Printf("[+] %s\n", msg)
 	}
 }
 
-func debug_print_runes(msgs []rune)  {
+func debug_print_runes(msgs []rune) {
 	if debug {
 		for _, msg := range msgs {
 			fmt.Printf("[+] %c\n", msg)
@@ -30,7 +31,7 @@ func debug_print_runes(msgs []rune)  {
 	}
 }
 
-func debug_print_rune(msg rune)  {
+func debug_print_rune(msg rune) {
 	if debug {
 		fmt.Printf("[+] %c\n", msg)
 	}
@@ -38,20 +39,19 @@ func debug_print_rune(msg rune)  {
 
 // function to read the lines
 func readLines(data *os.File) ([]string, error) {
-    var lines []string
-    scanner := bufio.NewScanner(data)
+	var lines []string
+	scanner := bufio.NewScanner(data)
 
-    for scanner.Scan() {
+	for scanner.Scan() {
 		text := scanner.Text()
 		lines = append(lines, text)
-    }
+	}
 
-    return lines, scanner.Err()
+	return lines, scanner.Err()
 }
 
+func main() {
 
-func main()  {
-	
 	// define CLI flags
 	flag.BoolVar(&debug, "d", false, "Print debug messages")
 	file_input := flag.String("f", "", "Path to file that should be read")
@@ -81,68 +81,68 @@ func main()  {
 			var package_len int = len(line)
 			var signal string = line
 			var start_marker int = 0
-	
-			for i := 0; i < package_len-3; i++  {
-				
+
+			for i := 0; i < package_len-3; i++ {
+
 				var markers set.RuneSet = set.RuneSet{}
 				var success_marker bool = true
-	
-				for _, marker := range signal[i : i + 4] {
-	
+
+				for _, marker := range signal[i : i+4] {
+
 					if markers.Has(marker) {
 						start_marker++
 						success_marker = false
 						break
 					}
-	
+
 					markers = *markers.Add(marker)
 				}
-				
+
 				if success_marker {
 					start_marker += 4
 					break
 				}
-	
+
 				debug_print("Printing runes")
 				debug_print_runes(markers.Runes())
 			}
-	
+
 			fmt.Printf("The start-of-packer marker is at: %d\n", start_marker)
 		}
 
 	} else if *task == "task2" {
-		
+
 		for _, line := range lines {
 
 			var package_len int = len(line)
 			var signal string = line
 			var start_marker int = 0
-	
-			for i := 0; i < package_len-13; i++  {
-				
+
+			for i := 0; i < package_len-13; i++ {
+
 				var markers set.RuneSet = set.RuneSet{}
 				var success_marker bool = true
-	
-				for _, marker := range signal[i : i + 14] {
-	
+
+				for _, marker := range signal[i : i+14] {
+
 					if markers.Has(marker) {
 						start_marker++
 						success_marker = false
 						break
 					}
-	
+
 					markers = *markers.Add(marker)
 				}
-				
+
 				if success_marker {
 					start_marker += 14
 					break
 				}
-	
+
 				debug_print("Printing runes")
 				debug_print_runes(markers.Runes())
 			}
-	
+
 			fmt.Printf("The start-of-message marker is at: %d\n", start_marker)
 		}
 	}
