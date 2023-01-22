@@ -4,7 +4,7 @@ https://adventofcode.com/2022
 Tasks are done in the golang.
 
 ## Statistics
-* Day 1   
+* [Day 1](day_1/)   
     - task 1 - Done  
     - task 2 - Done  
 * Day 2
