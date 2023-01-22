@@ -7,15 +7,15 @@ Tasks are done in the golang.
 * [Day 1](day_1/)   
     - task 1 - Done  
     - task 2 - Done  
-* Day 2
+* [Day 2](day_2/)
     - task 1 - Done
     - task 2 - Done  
-* Day 3  
+* [Day 3](day_3/)  
     - task 1 - Done  
     - task 2 - Done 
-* Day 4
+* [Day 4](day_4/)
     - task 1 - Done  
     - task 2 - Done  
-* Day 5
+* [Day 5](day_5/)
     - task 1 - Done
     - task 2 - Done
