@@ -22,7 +22,9 @@ Tasks are done in the golang.
 * [Day 6](day_6/)
     - task 1 - Done
     - task 2 - Done 
-    
+* [Day 7](day_7/)
+    - task 1 - Doing
+
 ## Execution
 To run a particular code use following pattern of terminal command:
 
