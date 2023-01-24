@@ -12,7 +12,12 @@ type EntityDescriptor struct {
 }
 
 func PrintEntity(entity EntityDescriptor) {
-	fmt.Printf("[-] Name: %s; Type: %s; Size: %d;\n", entity.Name, entity.Type_, entity.Size)
+	// if entity.Type_ == "dir" {
+		
+		fmt.Printf("[-] Name: %s; Type: %s; Size: %d;\n", entity.Name, entity.Type_, entity.Size)
+	// }	 
+	
+
 }
 
 func compareEntities(entity1 EntityDescriptor, entity2 EntityDescriptor) bool {
@@ -68,20 +73,37 @@ func (fileSystem *FileSystem) PrintInorder(fileSystemEntity *FileSystemEntity, l
 	if fileSystemEntity == nil {
 		return
 	} else {
+
 		if fileSystemEntity.is_root {
 			indent := strings.Repeat("\t", level)
 			fmt.Printf("%s", indent)
+			
 			PrintEntity(fileSystemEntity.entity)
-			level++
+			
+			if (fileSystemEntity.entity.Type_ == "dir"){
+
+				level++
+			}
 		}
 
 		for _, entity := range fileSystemEntity.sub_entities {
-			level++
+			// if entity.entity.Type_ == "dir"{
+				level++
+			// }
+
 			indent := strings.Repeat("\t", level)
 			fmt.Printf("%s", indent)
+
 			PrintEntity(entity.entity)
-			fileSystem.PrintInorder(entity, level)
-			level--
+
+			if entity.entity.Type_ == "dir"{
+
+				fileSystem.PrintInorder(entity, level)
+			}
+			
+			// if entity.entity.Type_ == "dir" {
+				level--
+			// }
 
 		}
 		return
@@ -97,12 +119,46 @@ func (fileSystem *FileSystem) GetTotalSize(fileSystemEntity *FileSystemEntity ) 
 			if entity.entity.Type_ == "file" {
 				size += entity.entity.Size
 			} else {
+				// var size_tmp int = 0
+
 				size  += fileSystem.GetTotalSize(entity)
+				// entity.entity.Size = size_tmp
+				
+				// size += size_tmp
 			}
 		}
 		return size
 	}
 }
+
+func (fileSystem *FileSystem) Search(entity EntityDescriptor) bool {
+    found := fileSystem.SearchRec(fileSystem.Root, entity)
+    return found
+}
+
+func (fileSystem *FileSystem) SearchRec(fileSystemEntity *FileSystemEntity , entity EntityDescriptor) bool {
+    if fileSystemEntity == nil {
+        return false
+    }
+
+    if compareEntities(fileSystemEntity.entity, entity) {
+        return true
+    }
+
+	for _, ent := range fileSystemEntity.sub_entities {
+		is_found := fileSystem.SearchRec(ent, entity)
+		
+		if is_found {
+			return true
+		}
+		// PrintEntity(ent.entity)
+	}
+
+
+    return false
+}
+
+
 // func main() {
 // 	fileSystem := FileSystem{}
 
@@ -132,5 +188,9 @@ func (fileSystem *FileSystem) GetTotalSize(fileSystemEntity *FileSystemEntity ) 
 // 	fileSystem.Insert(EntityDescriptor{"h", "file", 34}, parent...)
 // 	fmt.Printf("Printing\n")
 
-// 	fileSystem.Inorder(fileSystem.Root)
+// 	result := fileSystem.Search(EntityDescriptor{"h", "file", 34})
+
+// 	fmt.Printf("The entity is found: %v\n", result)
+
+// 	fileSystem.PrintInorder(fileSystem.Root, 0)
 // }

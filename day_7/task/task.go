@@ -16,6 +16,8 @@ var debug bool
 var fileSystem tree.FileSystem
 var parents []tree.EntityDescriptor
 var sizes []int 
+var visited []string
+
 
 func check(e error)  {
 	if e != nil {
@@ -86,16 +88,32 @@ func createTree(line string) {
 		
 		debug_print_parents(tmp_parents)
 		if args[0] == "dir" {
-			fileSystem.Insert(tree.EntityDescriptor{args[1], args[0], 0}, tmp_parents...)
 
-			debug_print("Done dir")
+			var exists bool = fileSystem.Search(tree.EntityDescriptor{args[1], args[0], 0})
+			if !exists {
+				fileSystem.Insert(tree.EntityDescriptor{args[1], args[0], 0}, tmp_parents...)
+				debug_print("dir added")
+			} else {
+				debug_print("dir already exists")
+			}
 
 		} else {
+			
 			size, err := strconv.Atoi(args[0])
-			sizes = append(sizes, size)
-
 			check(err)
-			fileSystem.Insert(tree.EntityDescriptor{args[1], "file", size}, tmp_parents...)
+
+			var exists bool = fileSystem.Search(tree.EntityDescriptor{args[1], "file", size})
+
+			if !exists  {
+				
+				sizes = append(sizes, size)
+				fileSystem.Insert(tree.EntityDescriptor{args[1], "file", size}, tmp_parents...)
+
+				debug_print("file added")
+			} else {
+				debug_print("file already exists")
+			}
+			
 			
 			debug_print("Done file")
 
@@ -130,9 +148,7 @@ func main() {
 	
 	if *task == "task1" {
 		
-	
 		// fileSystem.Insert(tree.EntityDescriptor{"/", "dir", 0})
-	
 		
 		for _, line := range lines {
 			// if index == 8 {
@@ -142,14 +158,16 @@ func main() {
 			createTree(line)
 		}
 		
-
 		// fmt.Printf("Printing the tree\n")
-		fileSystem.PrintInorder(fileSystem.Root, 0)
-
+		
 		// var size int = fileSystem.GetTotalSize(fileSystem.Root)
+		fileSystem.PrintInorder(fileSystem.Root, 0)
+		
 		var size int = 0
 		for _, sz := range sizes {
-			size += sz
+			if sz <= 100000 {
+				size += sz
+			}
 		}
 		fmt.Printf("Total size is: %d\n", size)
 
